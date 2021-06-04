@@ -24,7 +24,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@nebular/theme/styles/prebuilt/corporate.css",
+              "src/styles.css",
+              "src/assets/css/bootstrap-grid.min.css"
             ],
             "scripts": []
           },

@@ -1,0 +1,58 @@
+<div class="animate__animated animate__fadeIn">
+  <div class="row">
+    <div class="col-12 col-md-8 mx-auto">
+      <nb-alert
+        class="animate__animated animate__slideInDown"
+        [status]="alert.status"
+        *ngIf="alert.show"
+        >{{ alert.message }}</nb-alert
+      >
+      <form
+        [formGroup]="registerForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit()"
+        appAlert
+        (verifyForm)="verifyAlert()"
+      >
+        <div class="my-2">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <label for="fname" class="mb-1">Nombre</label>
+              <input
+                type="text"
+                id="fname"
+                nbInput
+                fullWidth
+                [status]="isValidFname ? 'basic' : 'danger'"
+                placeholder="Angel José"
+                [formControlName]="'fname'"
+              />
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="fname" class="mb-1">Apellido</label>
+              <input
+                type="text"
+                nbInput
+                fullWidth
+                status="basic"
+                placeholder="Apellido"
+                [formControlName]="'lname'"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="my-2">
+          <button
+            nbButton
+            type="submit"
+            status="primary"
+            fullWidth
+            [disabled]="registerForm.invalid"
+          >
+            Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

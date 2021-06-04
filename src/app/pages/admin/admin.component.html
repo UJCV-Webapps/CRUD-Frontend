@@ -1,0 +1,28 @@
+<div class="animate__animated animate__fadeIn">
+  <nb-search
+    type="rotate-layout"
+    placeholder="Buscar..."
+    hint="Presiona enter para buscar"
+  ></nb-search>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <nb-card
+        size="small"
+        class="mt-4"
+        [nbSpinner]="users.loading"
+        nbSpinnerStatus="primary"
+        nbSpinnerSize="large"
+      >
+        <nb-list
+          nbInfiniteList
+          [threshold]="100"
+          (bottomThreshold)="loadNext()"
+        >
+          <nb-list-item *ngFor="let user of users.users">
+            <nb-user [name]="user.name" [title]="user.title"> </nb-user>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+  </div>
+</div>
