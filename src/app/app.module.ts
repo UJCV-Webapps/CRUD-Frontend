@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbToastrModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { AlertDirective } from './directives/alert.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,15 +18,19 @@ import { AlertDirective } from './directives/alert.directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PagesModule,
-    AuthModule,
+
+    HttpClientModule,
+
     NoopAnimationsModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
     NbLayoutModule,
     NbEvaIconsModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    NbToastrModule.forRoot()
+    NbToastrModule.forRoot(),
+
+    PagesModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
