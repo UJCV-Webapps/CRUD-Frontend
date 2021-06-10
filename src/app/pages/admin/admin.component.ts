@@ -16,22 +16,38 @@ export class AdminComponent implements OnInit {
 
 
   employees: Employee[];
-
   page: number = 1;
-
   pageSize: number = 10;
-
   loading: boolean = true;
-
   empty: boolean = false;
-
   imgPreview: string;
-
   jobs: Job[] = [];
-
   jobSelect: number;
-
   selectedEmployee: Employee = { employee_id: 0, first_name: '', last_name: '', salary: 0, profile: '', job_title: '', email: '', phone_number: '', hire_date: new Date(), job_id: 0 };
+
+  get isValidFname(): boolean {
+    return this.selectedEmployee.first_name.length > 0;
+  }
+
+  get isValidLname(): boolean {
+    return this.selectedEmployee.last_name.length > 0;
+  }
+
+  get isValidEmail(): boolean {
+    return this.selectedEmployee.email.length > 0;
+  }
+
+  get isValidSalary(): boolean {
+    return this.selectedEmployee.salary.toString().length > 0;
+  }
+
+  get isValidPhoneNumber(): boolean {
+    return this.selectedEmployee.phone_number.length > 0;
+  }
+
+  get isValidForm(): boolean {
+    return this.isValidEmail && this.isValidFname && this.isValidLname && this.isValidPhoneNumber && this.isValidSalary;
+  }
 
   constructor( private _searchService: NbSearchService, private _employeeService: EmployeeService, private _toastrService: NbToastrService, private _jobService: JobService ) {
   } 
@@ -147,7 +163,7 @@ export class AdminComponent implements OnInit {
       this.showToast('bottom-right', 'Correcto', 'Datos actualizados correctamente', 'success');
     }, err => {
       const { error } = err;
-      this.showToast('bottom-right', 'Error', error.error, 'danger');
+      this.showToast('bottom-right', 'Error', error, 'danger');
       console.log(err);
     })
   }

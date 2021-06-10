@@ -1,7 +1,7 @@
 <div class="animate__animated animate__fadeIn">
   <div class="row">
-    <div class="col-12">
-      <h2 class="title">Registro de empleado</h2>
+    <div class="col-12 text-center">
+      <h1>Registro de Empleados</h1>
     </div>
   </div>
   <div class="row">
@@ -66,7 +66,7 @@
                 type="text"
                 nbInput
                 fullWidth
-                status="basic"
+                [status]="isValidLname ? 'basic' : 'danger'"
                 placeholder="Castillo Portillo"
                 [formControlName]="'lname'"
               />
@@ -81,6 +81,7 @@
               nbInput
               fullWidth
               placeholder="email@example.com"
+              [status]="isValidEmail ? 'basic' : 'danger'"
             />
           </div>
           <div class="my-2">
@@ -92,6 +93,7 @@
               nbInput
               fullWidth
               placeholder="15000"
+              [status]="isValidSalary ? 'basic' : 'danger'"
             />
           </div>
           <div class="my-2">
@@ -103,6 +105,7 @@
               nbInput
               fullWidth
               placeholder="00000000"
+              [status]="isValidPhoneNumber ? 'basic' : 'danger'"
             />
           </div>
           <div class="my-2">

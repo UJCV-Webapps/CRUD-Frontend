@@ -29,6 +29,18 @@ export class RegisterComponent implements OnInit {
     return !(this.registerForm.get('lname').touched && this.registerForm.get('lname').errors && this.registerForm.get('lname').errors.required);
   }
 
+  get isValidEmail(): boolean {
+    return !(this.registerForm.get('email').touched && this.registerForm.get('email').errors && this.registerForm.get('email').errors.required);
+  }
+
+  get isValidSalary(): boolean {
+    return !(this.registerForm.get('salary').touched && this.registerForm.get('salary').errors && this.registerForm.get('salary').errors.required);
+  }
+
+  get isValidPhoneNumber(): boolean {
+    return !(this.registerForm.get('phone_number').touched && this.registerForm.get('phone_number').errors && this.registerForm.get('phone_number').errors.required);
+  }
+
   constructor( private _formBuilder: FormBuilder, private _toastrService: NbToastrService, private _employeeService: EmployeeService, private _jobService: JobService ) { }
 
   ngOnInit(): void {
@@ -124,6 +136,14 @@ export class RegisterComponent implements OnInit {
     if(!this.isValidFname) {
       this.alert = { show: true, status: "danger", message: 'El nombre es obligatorio.' }
       return;
+    }else if(!this.isValidLname){
+      this.alert = { show: true, status: "danger", message: 'El apellido es obligatorio.' }
+    }else if(!this.isValidEmail){
+      this.alert = { show: true, status: "danger", message: 'El correo electrónico es obligatorio.' }
+    }else if(!this.isValidSalary){
+      this.alert = { show: true, status: "danger", message: 'El salario es obligatorio.' }
+    }else if(!this.isValidPhoneNumber){
+      this.alert = { show: true, status: "danger", message: 'El numero de telefono es obligatorio.' }
     }else {
       this.alert = { show: false };
     }

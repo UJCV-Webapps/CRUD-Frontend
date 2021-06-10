@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url_base: "http://localhost/CRUD-Backend"
+  api_url_base: "http://localhost/CRUD-Backend",
 };
 
 /*

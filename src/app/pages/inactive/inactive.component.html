@@ -1,4 +1,9 @@
 <div class="animate__animated animate__fadeIn">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>Empleados Inactivos</h1>
+    </div>
+  </div>
   <div class="container" *ngIf="inactiveEmployees.length === 0">
     <div class="row">
       <div class="col-12 col-md-8 mx-auto">
@@ -9,6 +14,7 @@
   <div class="container-fluid" *ngIf="inactiveEmployees.length > 0">
     <div class="row">
       <div class="col-12 col-md-4">
+        <small>Haz click sobre un empleado para ver su información.</small>
         <nb-card size="small">
           <nb-list>
             <nb-list-item
