@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
+import { NbMenuItem, NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'app-pages',
@@ -9,9 +9,13 @@ import { NbMenuItem } from '@nebular/theme';
 })
 export class PagesComponent implements OnInit {
 
+  currentTheme: string = "corporate";
+  themeChecked: boolean;
+
+
   public items: NbMenuItem[] = [
     {
-      title: 'Usuarios',
+      title: 'Empleados',
       expanded: true,
       children: [
         {
@@ -33,9 +37,21 @@ export class PagesComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor( private _themeService: NbThemeService ) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("theme")){
+      this.currentTheme = localStorage.getItem("theme");
+      this._themeService.changeTheme(this.currentTheme);
+      this.themeChecked = this.currentTheme === 'dark';
+    }
+  }
+
+  onChangeTheme() {
+    const theme = this.themeChecked? 'dark' : 'corporate';
+    this._themeService.changeTheme(theme);
+    this.currentTheme = theme;
+    localStorage.setItem("theme", theme);
   }
 
 }

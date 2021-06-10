@@ -1,3 +1,115 @@
 <div class="animate__animated animate__fadeIn">
-  <p>inactive works!</p>
+  <div class="container" *ngIf="inactiveEmployees.length === 0">
+    <div class="row">
+      <div class="col-12 col-md-8 mx-auto">
+        <nb-alert status="warning"> Aún no hay empleados inactivos </nb-alert>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" *ngIf="inactiveEmployees.length > 0">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <nb-card size="small">
+          <nb-list>
+            <nb-list-item
+              *ngFor="let employee of inactiveEmployees"
+              (click)="onSelectEmployee(employee.employee_id)"
+              [ngClass]="{
+                'bg-focus':
+                  selectedEmployee.employee_id === employee.employee_id
+              }"
+            >
+              <nb-user
+                [name]="
+                  getEmployeeFullName(employee.first_name, employee.last_name)
+                "
+                [title]="employee.job_title"
+                [picture]="getEmployeeProfile(employee.profile)"
+              >
+              </nb-user>
+            </nb-list-item>
+          </nb-list>
+        </nb-card>
+      </div>
+      <div
+        class="col-12 col-md-8 animate__animated animate__fadeIn"
+        *ngIf="selectedEmployee.employee_id !== 0"
+      >
+        <h2>Detalles de la cuenta</h2>
+        <hr />
+        <div class="row">
+          <div class="col-12 col-md-6 my-2">
+            <small class="d-block">Nombre:</small>
+            <input
+              type="text"
+              nbInput
+              disabled
+              [value]="selectedEmployee.first_name"
+              fullWidth
+            />
+          </div>
+          <div class="col-12 col-md-6 my-2 col-md-6">
+            <small class="d-block">Apellido:</small>
+            <input
+              type="text"
+              nbInput
+              disabled
+              [value]="selectedEmployee.last_name"
+              fullWidth
+            />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <small class="d-block">Correo Electrónico:</small>
+            <input
+              type="text"
+              nbInput
+              disabled
+              [value]="selectedEmployee.email"
+              fullWidth
+            />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <small class="d-block">Salario:</small>
+            <input
+              type="text"
+              nbInput
+              disabled
+              [value]="selectedEmployee.salary"
+              fullWidth
+            />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <small class="d-block">Celular/Telefono:</small>
+            <input
+              type="text"
+              nbInput
+              disabled
+              [value]="selectedEmployee.phone_number"
+              fullWidth
+            />
+          </div>
+          <div class="col-12 col-md-6 my-2">
+            <small class="d-block">Cargo:</small>
+            <input
+              type="text"
+              nbInput
+              disabled
+              [value]="selectedEmployee.job_title"
+              fullWidth
+            />
+          </div>
+          <div class="col-12 my-2">
+            <button
+              nbButton
+              fullWidth
+              status="primary"
+              (click)="onActiveAccount()"
+            >
+              Activar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

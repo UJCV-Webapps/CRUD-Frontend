@@ -5,11 +5,11 @@
     hint="Presiona enter para buscar"
   ></nb-search>
   <div class="row">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
       <nb-card
         size="small"
         class="mt-4"
-        [nbSpinner]="users.loading"
+        [nbSpinner]="loading"
         nbSpinnerStatus="primary"
         nbSpinnerSize="large"
       >
@@ -18,11 +18,130 @@
           [threshold]="100"
           (bottomThreshold)="loadNext()"
         >
-          <nb-list-item *ngFor="let user of users.users">
-            <nb-user [name]="user.name" [title]="user.title"> </nb-user>
+          <nb-list-item
+            *ngFor="let employee of employees"
+            (click)="onSelectEmployee(employee.employee_id)"
+            [ngClass]="{
+              'bg-focus': selectedEmployee.employee_id === employee.employee_id
+            }"
+          >
+            <nb-user
+              [name]="getFullName(employee.first_name, employee.last_name)"
+              [title]="employee.job_title"
+              [picture]="getProfile(employee.profile)"
+            >
+            </nb-user>
           </nb-list-item>
         </nb-list>
       </nb-card>
+    </div>
+    <div
+      class="col-12 col-md-8 animate__animated animate__fadeIn"
+      *ngIf="selectedEmployee.employee_id !== 0"
+    >
+      <h2>Detalles de la cuenta</h2>
+      <hr />
+      <div class="row">
+        <div class="col-12 my-2">
+          <div class="profile-preview">
+            <nb-icon
+              icon="edit-2-outline"
+              (click)="onOpenDialog()"
+              class="profile-icon"
+              nbTooltip="Cambiar foto"
+            ></nb-icon>
+            <img
+              [src]="
+                getProfile(selectedEmployee.profile) ||
+                '../../../assets/images/default.jpg'
+              "
+              class="profile-image"
+              #preview
+            />
+          </div>
+        </div>
+        <div class="col-12 my-2">
+          <input
+            type="file"
+            (change)="onChangeImage($event)"
+            #openDialog
+            class="d-none"
+            accept="image/*"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6 my-2">
+          <small class="d-block">Nombre:</small>
+          <input
+            type="text"
+            nbInput
+            [(ngModel)]="selectedEmployee.first_name"
+            fullWidth
+          />
+        </div>
+        <div class="col-12 col-md-6 my-2 col-md-6">
+          <small class="d-block">Apellido:</small>
+          <input
+            type="text"
+            nbInput
+            [(ngModel)]="selectedEmployee.last_name"
+            fullWidth
+          />
+        </div>
+        <div class="col-12 col-md-6 my-2">
+          <small class="d-block">Correo Electrónico:</small>
+          <input
+            type="text"
+            nbInput
+            [(ngModel)]="selectedEmployee.email"
+            fullWidth
+          />
+        </div>
+        <div class="col-12 col-md-6 my-2">
+          <small class="d-block">Salario:</small>
+          <input
+            type="text"
+            nbInput
+            [(ngModel)]="selectedEmployee.salary"
+            fullWidth
+          />
+        </div>
+        <div class="col-12 col-md-6 my-2">
+          <small class="d-block">Celular/Telefono:</small>
+          <input
+            type="text"
+            nbInput
+            [(ngModel)]="selectedEmployee.phone_number"
+            fullWidth
+          />
+        </div>
+        <div class="col-12 col-md-6 my-2">
+          <small class="d-block">Cargo:</small>
+          <nb-select
+            placeholder="Selecciona un cargo"
+            fullWidth
+            [selected]="jobSelect"
+            (selectedChange)="onSelectChange($event)"
+          >
+            <nb-option [value]="job.job_id" *ngFor="let job of jobs">{{
+              job.job_title
+            }}</nb-option>
+          </nb-select>
+        </div>
+        <div class="row my-2">
+          <div class="col-12 my-2">
+            <button nbButton status="primary" fullWidth (click)="onUpdate()">
+              Actualizar
+            </button>
+          </div>
+          <div class="col-12 my-2">
+            <button nbButton status="danger" fullWidth (click)="onDelete()">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

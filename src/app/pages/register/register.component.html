@@ -1,8 +1,40 @@
 <div class="animate__animated animate__fadeIn">
   <div class="row">
-    <div class="col-12 col-md-8 mx-auto">
+    <div class="col-12">
+      <h2 class="title">Registro de empleado</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4 profile d-flex align-items-center">
+      <div class="row">
+        <div class="col-12 my-2">
+          <div class="profile-preview">
+            <nb-icon
+              icon="edit-2-outline"
+              (click)="onOpenDialog()"
+              class="profile-icon"
+              nbTooltip="Cambiar foto"
+            ></nb-icon>
+            <img
+              [src]="imgPreview || '../../../assets/images/default.jpg'"
+              class="profile-image"
+            />
+          </div>
+        </div>
+        <div class="col-12 my-2">
+          <input
+            type="file"
+            (change)="onChangeImage($event)"
+            #openDialog
+            class="d-none"
+            accept="image/*"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-8">
       <nb-alert
-        class="animate__animated animate__slideInDown"
+        class="animate__animated animate__fadeIn"
         [status]="alert.status"
         *ngIf="alert.show"
         >{{ alert.message }}</nb-alert
@@ -35,22 +67,84 @@
                 nbInput
                 fullWidth
                 status="basic"
-                placeholder="Apellido"
+                placeholder="Castillo Portillo"
                 [formControlName]="'lname'"
               />
             </div>
           </div>
+          <div class="my-2">
+            <label for="email" class="mb-1">Correo Electrónico</label>
+            <input
+              type="email"
+              id="email"
+              [formControlName]="'email'"
+              nbInput
+              fullWidth
+              placeholder="email@example.com"
+            />
+          </div>
+          <div class="my-2">
+            <label for="salary" class="mb-1">Salario</label>
+            <input
+              type="text"
+              id="salary"
+              [formControlName]="'salary'"
+              nbInput
+              fullWidth
+              placeholder="15000"
+            />
+          </div>
+          <div class="my-2">
+            <label for="phone_number" class="mb-1">Celular/Teléfono</label>
+            <input
+              type="text"
+              id="phone_number"
+              [formControlName]="'phone_number'"
+              nbInput
+              fullWidth
+              placeholder="00000000"
+            />
+          </div>
+          <div class="my-2">
+            <label for="phone_number" class="mb-1">Cargo</label>
+            <nb-select
+              placeholder="Selecciona un cargo"
+              fullWidth
+              [formControlName]="'job_id'"
+              [selected]="registerForm.get('job_id').value"
+            >
+              <nb-option [value]="job.job_id" *ngFor="let job of jobs">{{
+                job.job_title
+              }}</nb-option>
+            </nb-select>
+          </div>
         </div>
         <div class="my-2">
-          <button
-            nbButton
-            type="submit"
-            status="primary"
-            fullWidth
-            [disabled]="registerForm.invalid"
-          >
-            Registrar
-          </button>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <button
+                nbButton
+                type="submit"
+                status="primary"
+                fullWidth
+                [disabled]="registerForm.invalid"
+                [nbSpinner]="loading"
+              >
+                Registrar
+              </button>
+            </div>
+            <div class="col-12 col-md-6">
+              <button
+                nbButton
+                type="button"
+                status="danger"
+                fullWidth
+                (click)="clear()"
+              >
+                Limpiar
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>

@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
-import { NbAlertModule, NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbListModule, NbMenuModule, NbSearchModule, NbSidebarModule, NbSpinnerModule, NbToastrModule, NbTreeGridModule, NbUserModule } from '@nebular/theme';
+import { NbAlertModule, NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbMenuModule, NbSearchModule, NbSelectModule, NbSidebarModule, NbSpinnerModule, NbToastrModule, NbTooltipModule, NbTreeGridModule, NbUserModule, NbThemeModule, NbToggleModule } from '@nebular/theme';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { InactiveComponent } from './inactive/inactive.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from '../directives/directives.module';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { DirectivesModule } from '../directives/directives.module';
     PagesRoutingModule,
 
     ReactiveFormsModule,
+    FormsModule,
 
     NbLayoutModule,
     NbCardModule,
@@ -37,6 +39,12 @@ import { DirectivesModule } from '../directives/directives.module';
     NbListModule,
     NbUserModule,
     NbSpinnerModule,
+    NbSelectModule,
+    NbEvaIconsModule,
+    NbIconModule,
+    NbTooltipModule,
+    NbThemeModule,
+    NbToggleModule,
 
     DirectivesModule
   ]
