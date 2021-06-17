@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
-import { Subscription } from 'rxjs';
 import { Alert } from '../../interfaces/alert.interface';
 import { EmployeeService } from '../../service/employee.service';
 import { JobService } from '../../service/job.service';
+
 import { Job } from '../../interfaces/job.interface';
 
 @Component({
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
       salary: ["", [Validators.required]],
       job_id: ["", [Validators.required]],
       profile: [""]
-    })
+    });
   }
 
   onSubmit() {
